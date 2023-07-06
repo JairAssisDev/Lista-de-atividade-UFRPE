@@ -1,5 +1,11 @@
 package questao02;
 
+import questao02.dados.RepositorioMidia;
+import questao02.dados.RepositorioReproducaoMidia;
+import questao02.dados.RepositorioUsuario;
+import questao02.negocios.ControladorMidia;
+import questao02.negocios.beans.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +14,7 @@ import java.util.List;
 public class Teste2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 		RepositorioMidia repositorioMidia = new RepositorioMidia();
 		RepositorioReproducaoMidia repositorioReproducaoMidia = new RepositorioReproducaoMidia();
@@ -78,26 +84,31 @@ public class Teste2 {
 		Usuario consumidor7 = new Consumidor("Rafael Mendes", LocalDate.of(1987, 7, 8), "rafaelmendes@gmail.com",
 				categorias10);
 
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(produtor1);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(produtor2);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(produtor3);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor1);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor2);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor3);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor4);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor5);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor6);
-		controladorMidia.getRepositorioUsuario().cadastrarUsuario(consumidor7);
+		controladorMidia.cadastrarUsuario(produtor1);
+		controladorMidia.cadastrarUsuario(produtor2);
+		controladorMidia.cadastrarUsuario(produtor3);
+		controladorMidia.cadastrarUsuario(consumidor1);
+		controladorMidia.cadastrarUsuario(consumidor2);
+		controladorMidia.cadastrarUsuario(consumidor3);
+		controladorMidia.cadastrarUsuario(consumidor4);
+		controladorMidia.cadastrarUsuario(consumidor5);
+		controladorMidia.cadastrarUsuario(consumidor6);
+		controladorMidia.cadastrarUsuario(consumidor7);
+		controladorMidia.removerUsuario(consumidor7);
 
-		System.out.println("\nLISTA DE CONSUMIDORES:\n");
+		System.out.println("\n--------------------------------------------------------------");
+		System.out.println("                     LISTA DE CONSUMIDORES:                     ");
 		System.out.println("*------------------------------------------------------------*\n");
 		controladorMidia.getRepositorioUsuario().imprimirConsumidores();
-		System.out.println("\nLISTA DE PRODUTORES:\n");
+		System.out.println("\n*------------------------------------------------------------*");
+		System.out.println("                      LISTA DE PRODUTORES:                      ");
 		System.out.println("*------------------------------------------------------------*\n");
 		controladorMidia.getRepositorioUsuario().imprimirProdutor();
-		System.out.println("\nLISTA DE USUARIOS ACIMA DE 16 ANOS:\n");
+		System.out.println("\n*------------------------------------------------------------*");
+		System.out.println("               LISTA DE USUARIOS ACIMA DE 16 ANOS:              ");
+		System.out.println("*------------------------------------------------------------*\n");
 		controladorMidia.getRepositorioUsuario().listaDeMaiorde16();
-		// controladorMidia.getRepositorioUsuario().listaDeMaiorde16();
+		System.out.println("\n*------------------------------------------------------------*");
 
 		Midia midia1 = new Midia(LocalDateTime.of(2023, 07, 04, 15, 31), "video 1", 18, "Jogos", (Produtor) produtor1);
 		Midia midia2 = new Midia(LocalDateTime.of(2023, 07, 04, 15, 31), "video 2", 15, "Jogos", (Produtor) produtor3);
@@ -108,21 +119,24 @@ public class Teste2 {
 		Midia midia7 = new Midia(LocalDateTime.of(2023, 07, 04, 15, 31), "video 7", 1, "Inovação",(Produtor) produtor3);
 		Midia midia8 = new Midia(LocalDateTime.of(2023, 07, 04, 15, 31), "video 8", 12, "Beleza", (Produtor) produtor3);
 
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia1);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia2);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia3);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia4);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia5);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia6);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia7);
-		controladorMidia.getRepositorioMidia().cadastrarMidia(midia8);
-		
+		controladorMidia.cadastrarMidia(midia1);
+		controladorMidia.cadastrarMidia(midia2);
+		controladorMidia.cadastrarMidia(midia3);
+		controladorMidia.cadastrarMidia(midia4);
+		controladorMidia.cadastrarMidia(midia5);
+		controladorMidia.cadastrarMidia(midia6);
+		controladorMidia.cadastrarMidia(midia7);
+		controladorMidia.cadastrarMidia(midia8);
+		controladorMidia.removerMidia(midia8);
+
+		System.out.println("      LISTA DE MIDIAS COM FAIXA ETARIA MAIOR QUE 14 ANOS:       ");
 		System.out.println("*------------------------------------------------------------*\n");
-		System.out.println("lista fraxa etaria 14");
 		controladorMidia.getRepositorioMidia().listarMidiasPorFaixaEtaria();
+		System.out.println("\n*------------------------------------------------------------*");
+		System.out.println("              LISTA DE MIDIAS COM CATEGORIAS JOGOS              ");
 		System.out.println("*------------------------------------------------------------*\n");
-		System.out.println("lista categoria jogo");
 		controladorMidia.getRepositorioMidia().listarMidiasPorCategoria();
+		System.out.println("\n*------------------------------------------------------------*");
 		
 		
 		
@@ -167,41 +181,20 @@ public class Teste2 {
         controladorMidia.cadastrarReproducaoMidia(reproducaoMidia18);
         controladorMidia.cadastrarReproducaoMidia(reproducaoMidia19);
         controladorMidia.cadastrarReproducaoMidia(reproducaoMidia20);
-        
-        
+
         LocalDateTime dataInicial = LocalDateTime.of(2023, 06, 03, 0, 0);
         LocalDateTime dataFinal = LocalDateTime.of(2023, 07, 05, 0, 0);
 
-        System.out.println("MIDIAS REPRODUZIDAS DE 03/06/2023 A 05/07/2023: ");
-        System.out.println("\n*------------------------------------------------------------*\n");
-        controladorMidia.listInDateTime(dataInicial, dataFinal);
-        
-        System.out.println("MIDIAS REPRODUZIDAS PELO CONSUMIDOR 1: ");
-        System.out.println("\n*------------------------------------------------------------*\n");
+		System.out.println("           MIDIAS REPRODUZIDAS DE 03/06/2023 A 05/07/2023:        ");
+        System.out.println("*--------------------------------------------------------------*\n");
+        controladorMidia.getRepositorioReproducaoMidia().listInDateTime(dataInicial, dataFinal);
+		System.out.println("\n*--------------------------------------------------------------*");
+        System.out.println("               MIDIAS REPRODUZIDAS PELO CONSUMIDOR 1:             ");
+        System.out.println("*--------------------------------------------------------------*\n");
         controladorMidia.getRepositorioReproducaoMidia().listaMidiaUser((Consumidor)consumidor1);
-
-        System.out.println("\n*------------------------------------------------------------*\n");
-        System.out.println("\nLISTA DE REPRODUCAO DE MIDIAS DA CATEGORIA JOGOS:\n");
-        System.out.println("*------------------------------------------------------------*\n");
+		System.out.println("\n*--------------------------------------------------------------*");
+        System.out.println("          LISTA DE REPRODUCAO DE MIDIAS DA CATEGORIA JOGOS:       ");
+        System.out.println("*--------------------------------------------------------------*\n");
         controladorMidia.getRepositorioReproducaoMidia().listaCategoriaJogo();
 	}
-
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
