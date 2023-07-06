@@ -9,7 +9,7 @@ public class Jogador {
 
     public Jogador() {
         mao = new ArrayList<>();
-        fichas = 100; // Valor inicial de fichas
+        fichas = 100;
     }
 
     public void adicionarCarta(Carta carta) {

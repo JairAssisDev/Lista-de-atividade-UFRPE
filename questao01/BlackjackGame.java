@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class BlackjackGame {
     private static final int APOSTA_MINIMA = 2;
     private static final int APOSTA_MAXIMA = 100;
-
     private final Baralho baralho;
     private final Jogador jogador;
     private final Banca banca;
@@ -20,19 +19,20 @@ public class BlackjackGame {
     }
 
     public void jogar() {
-        System.out.println("Bem-vindo ao jogo de Blackjack!");
+        System.out.println("\n*-----------------------------------------------------------*");
+        System.out.println("*----------------- Bem-vindo ao BlackJack! -----------------*");
+        System.out.println("*-----------------------------------------------------------*");
 
         while (true) {
             System.out.println("\nFichas disponíveis: " + jogador.getFichas());
             realizarAposta();
             distribuirCartas();
 
-            if (verificarBlackjack(jogador.getMao())) {
-                System.out.println("Blackjack! Você ganhou!");
-                jogador.aumentarFichas(apostaAtual);
-            } else {
+                if (true) {
                 jogarJogador();
+                if (!verificarEstouro(jogador.getMao())){
                 jogarBanca();
+                }
                 verificarVencedor();
             }
 
@@ -43,8 +43,6 @@ public class BlackjackGame {
                 break;
             }
         }
-
-        System.out.println("Obrigado por jogar!");
     }
 
     private void realizarAposta() {
@@ -52,17 +50,18 @@ public class BlackjackGame {
         int fichasDisponiveis = jogador.getFichas();
 
         while (true) {
-            System.out.print("Faça sua aposta (mínimo " + APOSTA_MINIMA + " fichas, máximo " + APOSTA_MAXIMA + " fichas): ");
+            System.out.print("Faça sua aposta mínimo " + APOSTA_MINIMA + " fichas, máximo " + APOSTA_MAXIMA + " fichas: ");
             apostaAtual = scanner.nextInt();
+            jogador.diminuirFichas((int)apostaAtual);
+            System.out.println(jogador.getFichas());
 
             if (apostaAtual >= APOSTA_MINIMA && apostaAtual <= APOSTA_MAXIMA && apostaAtual <= fichasDisponiveis) {
                 break;
             }
 
-            System.out.println("Aposta inválida. Por favor, insira um valor válido.");
+            System.out.println("Por favor, insira um valor válido.");
         }
 
-        jogador.diminuirFichas(apostaAtual);
     }
 
     private void distribuirCartas() {
@@ -79,21 +78,21 @@ public class BlackjackGame {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("\nDeseja (H)it ou (S)tand? ");
+            System.out.print("\nDeseja (H) Hit - Pedir mais cartas - ou (S) Stand - parar? ");
             String escolha = scanner.nextLine();
 
-            if (escolha.equalsIgnoreCase("H")) {
+            if (escolha.equals("H") || escolha.equals("h")) {
                 jogador.adicionarCarta(baralho.pegarCarta());
                 System.out.println("Jogador: " + jogador.getMao());
 
                 if (verificarEstouro(jogador.getMao())) {
-                    System.out.println("Estourou! Você perdeu.");
+                    System.out.println("Você perdeu! :(");
                     return;
                 }
-            } else if (escolha.equalsIgnoreCase("S")) {
+            } else if (escolha.equals("S") || escolha.equals("s")) {
                 break;
             } else {
-                System.out.println("Escolha inválida. Por favor, escolha H ou S.");
+                System.out.println("Escolha inválida. Por favor, escolha H (h) ou S (s).");
             }
         }
     }
@@ -106,8 +105,7 @@ public class BlackjackGame {
             System.out.println("Banca: " + banca.getMao());
 
             if (verificarEstouro(banca.getMao())) {
-                System.out.println("A banca estourou! Você ganhou!");
-                jogador.aumentarFichas(apostaAtual * 2);
+                System.out.println("\nVocê ganhou! : \n");
                 return;
             }
         }
@@ -117,14 +115,14 @@ public class BlackjackGame {
         int pontuacaoJogador = pontuacao(jogador.getMao());
         int pontuacaoBanca = pontuacaoBanca();
 
-        System.out.println("\nPontuação final:");
-        System.out.println("Jogador: " + pontuacaoJogador);
-        System.out.println("Banca: " + pontuacaoBanca);
+        System.out.println("\n*---------Pontuação final:---------*");
+        System.out.println("* Jogador: " + pontuacaoJogador);
+        System.out.println("* Banca: " + pontuacaoBanca);
 
-        if (pontuacaoJogador > pontuacaoBanca) {
-            System.out.println("Você ganhou!");
+        if (pontuacaoJogador > pontuacaoBanca && pontuacaoJogador <= 21 || pontuacaoBanca > 21) {
+            System.out.println("*---------Parabéns Campeão!--------*");
             jogador.aumentarFichas(apostaAtual * 2);
-        } else if (pontuacaoJogador < pontuacaoBanca) {
+        } else if (pontuacaoJogador < pontuacaoBanca && pontuacaoBanca <= 21 || pontuacaoJogador > 21) {
             System.out.println("Você perdeu.");
         } else {
             System.out.println("Empate.");
@@ -134,33 +132,24 @@ public class BlackjackGame {
 
     private boolean querContinuarJogando() {
         Scanner scanner = new Scanner(System.in);
+        int fichasDisponiveis = jogador.getFichas();
 
-        while (true) {
-            System.out.print("\nDeseja jogar novamente? (S)im ou (N)ão: ");
+        while (fichasDisponiveis > 0) {
+            System.out.print("\nDeseja jogar novamente? (S) Sim ou (N) Não: ");
             String escolha = scanner.nextLine();
 
-            if (escolha.equalsIgnoreCase("S")) {
+            if (escolha.equals("S") || escolha.equals("s")) {
                 return true;
-            } else if (escolha.equalsIgnoreCase("N")) {
+            } else if (escolha.equals("N") || escolha.equals("n")) {
                 return false;
             } else {
-                System.out.println("Escolha inválida. Por favor, escolha S ou N.");
+                System.out.println("Inválido. Escolha S (s) ou N (n).");
             }
         }
+        System.out.println("*-------------Perdeu Cowboy!---------------*");
+        return false;
     }
 
-    private boolean verificarBlackjack(List<Carta> mao) {
-        if (mao.size() != 2) {
-            return false;
-        }
-
-        Carta primeiraCarta = mao.get(0);
-        Carta segundaCarta = mao.get(1);
-
-        return (primeiraCarta.getValor().equals("A") && segundaCarta.getValor().equals("10"))
-                || (primeiraCarta.getValor().equals("10") && segundaCarta.getValor().equals("A"));
-    }
-    
     private boolean verificarEstouro(List<Carta> mao) {
         int pontuacao = pontuacao(mao);
         return pontuacao > 21;
@@ -194,7 +183,6 @@ public class BlackjackGame {
     private int pontuacaoBanca() {
         int totalPontos = pontuacao(banca.getMao());
 
-        // Exibe a segunda carta da banca (antes oculta)
         System.out.println("Banca: " + banca.getMao());
 
         return totalPontos;
