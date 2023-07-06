@@ -24,26 +24,25 @@ class RepositorioMidia {
         return midias.stream().anyMatch(m -> m.getArquivo().equals(midia.getArquivo()));
     }
 
-    public List<Midia> listarMidiasPorFaixaEtaria(int faixaEtaria) {
+    public void listarMidiasPorFaixaEtaria() {
 
-        List<Midia> midiasPorFaixaEtaria = new ArrayList<>();
-        for (Midia m : midias) {
-            if (m.getFaixaEtariaMinima() <= faixaEtaria) {
-                midiasPorFaixaEtaria.add(m);
+        for (Midia midia : midias) {
+            if (midia.getFaixaEtariaMinima() > 14) {
+                System.out.println("Nome: "+midia.getArquivo());
             }
         }
-        return midiasPorFaixaEtaria;
+        
 
     }
 
-    public List<Midia> listarMidiasPorCategoria(String categoria) {
-        List<Midia> midiasPorCategoria = new ArrayList<>();
-        for (Midia m : midias) {
-            if (m.getCategoria().equals(categoria)) {
-                midiasPorCategoria.add(m);
+    public void listarMidiasPorCategoria() {
+        
+        for (Midia midia: midias) {
+            if (midia.getCategoria().equals("Jogos")) {
+                System.out.println("Nome: "+midia.getArquivo());
             }
         }
-        return midiasPorCategoria;
+        
     }
 
     @Override

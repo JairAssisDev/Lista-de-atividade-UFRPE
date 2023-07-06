@@ -221,7 +221,6 @@ public class Teste {
             }
         }
         System.out.println("\n*------------------------------------------------------------*\n");
-
         System.out.println("\nLISTA DE REPRODUCAO DE MIDIAS DA CATEGORIA JOGOS:\n");
         System.out.println("*------------------------------------------------------------*\n");
         for (ReproducaoMidia reproducao : reproducaoMidias) {

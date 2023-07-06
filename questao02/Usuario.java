@@ -39,13 +39,11 @@ public abstract class Usuario {
         return dataNascimento;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "nomeCompleto='" + nomeCompleto + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", email='" + email + '\'' +
-                '}';
+    public String printUser() {
+        return 
+                "Nome do Usuario: "  + nomeCompleto + "||" + 
+                " Email: " + email 
+                ;
     }
 }
 

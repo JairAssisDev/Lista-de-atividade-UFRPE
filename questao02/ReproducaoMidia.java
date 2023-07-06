@@ -1,9 +1,11 @@
 package questao02;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
+
 public class ReproducaoMidia {
+	
 
     private Midia midia;
     private Consumidor consumidor;
@@ -13,6 +15,7 @@ public class ReproducaoMidia {
         this.midia = midia;
         this.consumidor = consumidor;
         this.dataHoraReproducao = dataHoraReproducao;
+        
     }
 
     public Midia getMidia() {
@@ -27,9 +30,12 @@ public class ReproducaoMidia {
         return dataHoraReproducao;
     }
 
-    @Override
-    public String toString() {
-        return "ReproducaoMidia [midia=" + midia + ", consumidor=" + consumidor + ", dataHoraReproducao="
-                + dataHoraReproducao + "]";
-    }
+	
+	
+
+
 }
+    
+    
+   
+

@@ -17,6 +17,23 @@ class RepositorioReproducaoMidia {
         }
     }
 
+    public void listaMidiaUser(Consumidor consumidor) {
+    	for (ReproducaoMidia reproducao : reproducoes) {
+            if (reproducao.getConsumidor().equals(consumidor)) {
+                System.out.println(reproducao.getMidia().getArquivo());
+            }
+        }
+    }
+    
+    public void listaCategoriaJogo() {
+    	for (ReproducaoMidia reproducao : reproducoes) {
+            if (reproducao.getMidia().getCategoria().equals("Jogos")) {
+                System.out.println("Reproducao Midia-midia: " + reproducao.getMidia().getArquivo() + " Categoria: " + reproducao.getMidia().getCategoria());
+            }
+        }
+    }
+    
+    
     public List<ReproducaoMidia> listarReproducoesNoPeriodo(LocalDateTime inicio, LocalDateTime fim) {
         List<ReproducaoMidia> reproducoesNoPeriodo = new ArrayList<>();
         for (ReproducaoMidia rm : reproducoes) {
