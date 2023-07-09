@@ -20,7 +20,7 @@ public class Consumidor extends Usuario{
 
     @Override
     public String toString() {
-        return "Consumidor [email=" + getEmail() + ", nomeCompleto=" + getNomeCompleto() + ", dataNascimento="
+        return "Consumidor [email=" + getEmail() + ", nomeCompleto=" + getNomeCompleto() + ", dataNascimento= "
                 + getDataNascimento() + ", categoriasInteresse=" + categoriasInteresse + "]";
     }
 }
