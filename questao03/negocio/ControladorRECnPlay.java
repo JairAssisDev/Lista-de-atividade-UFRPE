@@ -18,9 +18,9 @@ public class ControladorRECnPlay {
         this.repositorioPalestras = repositorioPalestras;
     }
 
-    public void cadastrarPessoa (Pessoa pessoa) {
-        if (pessoa != null && pessoa instanceof Participante && ((Participante) pessoa).getTrilhaDeInteresse() != null) {
-            repositorioPessoas.inserirPessoa(pessoa);
+    public void cadastrarParticipante (Pessoa participante) {
+        if (participante != null && participante instanceof Participante && ((Participante) participante).getTrilhaDeInteresse() != null) {
+            repositorioPessoas.inserirPessoa(participante);
         }
     }
 
@@ -33,9 +33,7 @@ public class ControladorRECnPlay {
     public void cadastrarPalestra (Palestra palestra){
         if (palestra != null && !repositorioPalestras.buscarPalestraPorTitulo(palestra.getTitulo())){
             cadastrarPalestrante(palestra.palestrante);
-
             if (!repositorioPalestras.buscarPalestraPorDataHora(palestra.dataHora)){
-                System.out.println("Palestra cadastrada com sucesso");
                 repositorioPalestras.inserirPalestra(palestra);
             }
         }
@@ -47,7 +45,6 @@ public class ControladorRECnPlay {
                 for (Palestra palestra : repositorioPalestras.getPalestras()) {
                     if (palestra.getTitulo() == avaliacao.getPalestra().getTitulo()) {
                         palestra.adicionarNotasNaAvaliacao(avaliacao);
-                        System.out.println("toma no cu");
                         break;
                         
                     }
@@ -61,9 +58,8 @@ public class ControladorRECnPlay {
         
         todasPalestras.sort(Comparator.comparingDouble(Palestra::getMediaAvaliacao).reversed());
 
-        System.out.println("Palestras mais bem avaliadas:");
         for (Palestra palestra : todasPalestras) {
-            System.out.println("- " + palestra.getTitulo() + ": Média de avaliação = " + palestra.getMediaAvaliacao());
+            System.out.println("* " + palestra.getTitulo() + " || Média de avaliação = " + palestra.getMediaAvaliacao());
         }
     }
     
@@ -76,16 +72,22 @@ public class ControladorRECnPlay {
                 palestrasComMediaMaior.add(palestra);
             }
         }
-
-        System.out.println("Palestras com média de avaliação maior que " + nota + ":");
         for (Palestra palestra : palestrasComMediaMaior) {
-            System.out.println("- " + palestra.getTitulo() + ": Média de avaliação = " + palestra.getMediaAvaliacao());
+            System.out.println("* " + palestra.getTitulo() + " || Média de avaliação = " + palestra.getMediaAvaliacao());
         }
     }
 
+    public void listarPessoasAcimaDaIdade(int idadeMinima) {
+        List<Pessoa> pessoasAcimaDaIdade = new ArrayList<>();
 
-
-
-
+        for (Pessoa pessoa : repositorioPessoas.getPessoas()) {
+            if (pessoa.getIdade() > idadeMinima) {
+                pessoasAcimaDaIdade.add(pessoa);
+            }
+        }
+        for (Pessoa pessoa : pessoasAcimaDaIdade) {
+            System.out.println(pessoa.getNome() + ": " + pessoa.getIdade() + " anos");
+        }
+    }
 }
 

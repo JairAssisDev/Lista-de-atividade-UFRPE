@@ -8,9 +8,11 @@ import java.util.List;
 
 public class RepositorioPessoas {
     private List<Pessoa> pessoas;
+
     public RepositorioPessoas(){
         pessoas = new ArrayList<>();
     }
+
 
     public void inserirPessoa(Pessoa pessoa) {
         if (!existePessoaComEmail(pessoa.getEmail())) {
@@ -47,42 +49,7 @@ public class RepositorioPessoas {
         return null;
     }
 
-    public List<Palestrante> listarPalestrantesPorEmpresa(String empresa) {
-        List<Palestrante> palestrantes = new ArrayList<>();
-        for (Pessoa pessoa : pessoas) {
-            if (pessoa instanceof Palestrante) {
-                Palestrante palestrante = (Palestrante)pessoa;
-                if (palestrante.getEmpresa().equals(empresa)) {
-                    palestrantes.add(palestrante);
-                }
-            }
-        }
-        return palestrantes;
-    }
-
-    public List<Participante> listarParticipantesComInteresseEm(String trilha) {
-        List<Participante> participantes = new ArrayList<>();
-        for (Pessoa pessoa : pessoas) {
-            if (pessoa instanceof Participante) {
-                Participante participante = (Participante) pessoa;
-                if (participante.getTrilhaDeInteresse().equals(trilha)) {
-                    participantes.add(participante);
-                }
-            }
-        }
-        return participantes;
-    }
-
-    public List<Participante> listarParticipantesComIdadeMaiorQue(int idade) {
-        List<Participante> participantes = new ArrayList<>();
-        for (Pessoa pessoa : pessoas) {
-            if (pessoa instanceof Participante) {
-                Participante participante = (Participante)pessoa;
-                if (participante.getIdade() >= idade) {
-                    participantes.add(participante);
-                }
-            }
-        }
-        return participantes;
+    public List<Pessoa> getPessoas() {
+        return pessoas;
     }
 }

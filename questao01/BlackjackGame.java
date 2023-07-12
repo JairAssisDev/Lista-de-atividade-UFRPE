@@ -1,5 +1,6 @@
 package questao01;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,9 +11,11 @@ public class BlackjackGame {
     private final Jogador jogador;
     private final Banca banca;
     private int apostaAtual;
+    private int numeroDecks;
 
-    public BlackjackGame() {
-        baralho = new Baralho(1);
+    public BlackjackGame(int numeroDecks) {
+        this.numeroDecks = Math.max(2, Math.min(numeroDecks,10));
+        baralho = new Baralho(this.numeroDecks);
         jogador = new Jogador();
         banca = new Banca();
         apostaAtual = 0;
@@ -48,6 +51,7 @@ public class BlackjackGame {
     private void realizarAposta() {
         Scanner scanner = new Scanner(System.in);
         int fichasDisponiveis = jogador.getFichas();
+        System.out.println("Cartas restantes no baralho: " + baralho.getQuantidadeCartas());
 
         while (true) {
             System.out.print("Faça sua aposta mínimo " + APOSTA_MINIMA + " fichas, máximo " + APOSTA_MAXIMA + " fichas: ");
@@ -189,7 +193,11 @@ public class BlackjackGame {
     }
 
     public static void main(String[] args) {
-        BlackjackGame jogo = new BlackjackGame();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Quantos decks quer utilizar? (2 -> 10)");
+        int numDecks = scanner.nextInt();
+        BlackjackGame jogo = new BlackjackGame(numDecks);
         jogo.jogar();
     }
 }
